@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Libro {
@@ -8,19 +9,22 @@ public class Libro {
 	private String titulo;
 	private String categoria;
 	private float precio;
+	private Date fechaPublicacion;
 
 
 	public Libro() {
 	}
 
-	public Libro(int cod, String titulo, String categoria, float precio) {
+	public Libro(int cod, String titulo, String categoria, float precio, Date fechaPublicacion) {
 		super();
 		this.cod = cod;
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.precio = precio;
+		this.fechaPublicacion=fechaPublicacion;
 
 	}
+
 
 	public int getCod() {
 		return cod;
@@ -54,6 +58,13 @@ public class Libro {
 		this.precio = precio;
 	}
 
+	public Date getFechaPublicacion() {
+		return fechaPublicacion;
+	}
+
+	public void setFechaPublicacion(Date fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
+	}
 
 
 }
