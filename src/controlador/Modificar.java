@@ -16,13 +16,15 @@ public class Modificar {
 
 	public static void modificarAutor(ODB odb) {
 		String dni = PedirDatos.pedirDni();
-		String nuevaDireccion = PedirDatos.pedirNuevaDireccion();
+		
 		try {
 			IQuery query = new CriteriaQuery(Autor.class, Where.equal("dni", dni));
 			Autor a = (Autor) odb.getObjects(query).getFirst();
+			String nuevaDireccion = PedirDatos.pedirNuevaDireccion();
 			a.setDireccion(nuevaDireccion);
 			odb.store(a);
 			odb.commit();
+			Mensajes.direccionmodificada(dni);
 		} catch (ODBRuntimeException e) {
 			Mensajes.autorNoEncontrado();
 		}
@@ -31,11 +33,11 @@ public class Modificar {
 	public static void modificarPrecio(ODB odb) {
 		String titulo = PedirDatos.pedirTitulo();
 		String nombre = PedirDatos.pedirNombre();
-		float precio = PedirDatos.pedirPrecio();
-
+	
 		try {
 			IQuery query = new CriteriaQuery(Autor.class, Where.equal("nombre", nombre));
 			Autor a = (Autor) odb.getObjects(query).getFirst();
+			float precio = PedirDatos.pedirPrecio();
 
 			for (Libro l : a.getLibros()) {
 				if (l.getTitulo().equalsIgnoreCase(titulo)) {

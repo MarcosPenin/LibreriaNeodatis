@@ -1,6 +1,7 @@
 package controlador;
 
 import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBRuntimeException;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
 import org.neodatis.odb.core.query.criteria.Where;
@@ -17,25 +18,29 @@ public class Insertar {
 		Autor autor = PedirDatos.pedirAutor();
 		IQuery query = new CriteriaQuery(Autor.class, Where.equal("dni", autor.getDni()));
 		Objects repetidos = odb.getObjects(query);
-		
 		if (repetidos.isEmpty()) {
 			odb.store(autor);
 			odb.commit();
+			Mensajes.autorInsertado(autor);
 		} else {
 			Mensajes.autorRepetido();
 		}
-
 	}
 
 	public static void anadirLibroAutor(ODB odb) {
 		Libro libro = PedirDatos.pedirLibro();
 		String dni = PedirDatos.pedirDni();
 		IQuery query = new CriteriaQuery(Autor.class, Where.equal("dni", dni));
-		Autor autor = (Autor) odb.getObjects(query).getFirst();
+		Autor autor = null;
+		try {
+			autor = (Autor) odb.getObjects(query).getFirst();
+		} catch (ODBRuntimeException e) {
+			Mensajes.autorNoEncontrado();
+		}
 
 		IQuery query2 = new CriteriaQuery(Libro.class, Where.equal("cod", libro.getCod()));
-		Objects repetidos = odb.getObjects(query);
-		
+		Objects repetidos = odb.getObjects(query2);
+
 		if (repetidos.isEmpty()) {
 			if (autor != null) {
 				autor.anadirLibro(libro);
@@ -47,6 +52,5 @@ public class Insertar {
 		} else {
 			Mensajes.libroRepetido();
 		}
-
 	}
 }

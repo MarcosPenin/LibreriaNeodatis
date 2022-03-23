@@ -25,11 +25,9 @@ public class Consultar {
 		if (italianos.isEmpty()) {
 			Mensajes.sinCoincidencias();
 		} else {
-			while (italianos.hasNext()) {
-				Autor autor = (Autor) italianos.next();
-				ConsultasVista.imprimirAutor(autor);
-
-			}
+			ConsultasVista.autoresItalianos(italianos);
+			
+		
 		}
 	}
 
@@ -54,17 +52,15 @@ public class Consultar {
 
 	public static void autoresEspanolesMenores60(ODB odb) {
 
-		ICriterion criterio = new And().add(Where.equal("nacionalidad", "Espana")).add(Where.lt("edad", 60));
+		ICriterion criterio = new And().add(Where.equal("nacionalidad", "España")).add(Where.lt("edad", 60));
 		IQuery query = new CriteriaQuery(Autor.class, criterio);
 
 		Objects espanolesMenores60 = odb.getObjects(query);
 		if (espanolesMenores60.isEmpty()) {
 			Mensajes.sinCoincidencias();
 		} else {
-			while (espanolesMenores60.hasNext()) {
-				Autor autor = (Autor) espanolesMenores60.next();
-				ConsultasVista.imprimirAutor(autor);
-			}
+			ConsultasVista.imprimirAutoresMenores60(espanolesMenores60);
+					
 		}
 
 	}
@@ -86,27 +82,34 @@ public class Consultar {
 	public static void libroConAutor(ODB odb) {
 		String titulo = PedirDatos.pedirTitulo();
 		Objects autores = odb.getObjects(Autor.class);
-
+		
 		while (autores.hasNext()) {
 			Autor autor = (Autor) autores.next();
 			for (Libro l : autor.getLibros()) {
-				if (l.equals(titulo)) {
+				if (l.getTitulo().equals(titulo)) {
 					ConsultasVista.imprimirLibro(l);
 					ConsultasVista.imprimirAutor(autor);
 				}
 			}
 
 		}
+	}
+
+	public static void numAutoresNacion(ODB odb) {
+
+		String nacion = PedirDatos.pedirNacion();
+		Objects autores = odb.getObjects(Autor.class);
+		int contador = 0;
+		while (autores.hasNext()) {
+			Autor autor = (Autor) autores.next();
+			if (autor.getNacionalidad().equalsIgnoreCase(nacion)) {
+				contador++;
+			}
+		}
+
+		ConsultasVista.imprimirNumAutoresNacion(nacion, contador);
 
 	}
 
 }
 
-/*
- * . 8-Visualiza todos los autores cuya nacionalidad sea ESPAÑOLA y su edad sea
- * < de 60 años.En el listado poner una cabecera en la que figure: Nombre Edad
- * Libros ----------- ------- -------- 9- Visualiza por cada nación, el nº de
- * Autores. 10-Introduciendo el nombre de un autor, nos visualice todos sus
- * libros. Título Precio -------- -------- 11- Consultas. “Introduciendo el
- * título de un libro visualice los datos del libro y autor”. 12- Fin.
- */

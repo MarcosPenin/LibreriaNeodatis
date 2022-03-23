@@ -1,5 +1,4 @@
-/main/
-/controlador/
-/vista/
 /modelo/
-/utilidades/
+/vista/
+/controlador/
+/main/

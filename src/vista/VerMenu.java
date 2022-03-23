@@ -88,6 +88,14 @@ public class VerMenu {
 		opciones.add("Salir");
 		return opciones;
 	}
+	
+	static ArrayList<String> siNo(){
+		ArrayList<String> opciones = new ArrayList<String>();
+		opciones.add("Sí");
+		opciones.add("No");
+		opciones.add("Salir");
+		return opciones;
+	}
 
 	
 

@@ -11,7 +11,6 @@ public class Libro {
 	private float precio;
 	private Date fechaPublicacion;
 
-
 	public Libro() {
 	}
 
@@ -21,10 +20,9 @@ public class Libro {
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.precio = precio;
-		this.fechaPublicacion=fechaPublicacion;
+		this.fechaPublicacion = fechaPublicacion;
 
 	}
-
 
 	public int getCod() {
 		return cod;
@@ -66,5 +64,8 @@ public class Libro {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
+	public String toString() {
+		return this.titulo+"\n";
+	}
 
 }

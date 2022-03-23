@@ -75,6 +75,9 @@ public class Autor {
 		this.libros = libros;
 	}
 	
+	public String toString() {
+		return this.nombre+"\n";	
+	}
 	
 	
 	

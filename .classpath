@@ -7,6 +7,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Neodatis"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/a20marcosgp/Desktop/Temporal/LibreriaNeodatis/lib/neodatis-odb-1.9.30.689 .jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

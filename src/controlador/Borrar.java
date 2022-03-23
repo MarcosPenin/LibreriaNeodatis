@@ -16,15 +16,15 @@ public class Borrar {
 	public static void libro(ODB odb) {
 		int cod=PedirDatos.pedirCodigo();		
 		try{
-			IQuery query = new CriteriaQuery(Autor.class, Where.equal("cod", cod));
+			IQuery query = new CriteriaQuery(Libro.class, Where.equal("cod", cod));
 			Libro l = (Libro) odb.getObjects(query).getFirst();
 			odb.delete(l);
-			odb.commit();		
+			odb.commit();
+			Mensajes.libroBorrado(cod);
 		}catch (ODBRuntimeException e) {
 			Mensajes.libroNoEncontrado();
 		}
-		
-		
+			
 	}
 
 }
