@@ -78,13 +78,13 @@ public class PedirDatos {
 	}
 
 	public static String pedirTitulo() {
-		System.out.println("Introduce el título");
+		System.out.println("Introduce el título del libro");
 		String titulo = sc.nextLine();
 		return titulo;
 	}
 
 	public static String pedirNombre() {
-		System.out.println("Introduce el nombre");
+		System.out.println("Introduce el nombre del autor");
 		String nombre = sc.nextLine();
 		return nombre;
 	}
@@ -101,13 +101,17 @@ public class PedirDatos {
 		return codigo;
 	}
 
-	public static Date pedirFechaInicio() {
-		Date fechaInicio = new Date(1500, 12, 12);
+	public static Date pedirFechaInicio() {		
+		System.out.println("¿Desde qué fecha quieres buscar libros? (Formato: YYYY-MM-DD)");
+		String fecha=sc.nextLine();		
+		Date fechaInicio =  Date.valueOf(fecha);
 		return fechaInicio;
 	}
 
 	public static Date pedirFechaFin() {
-		Date fechaFin = new Date(2000, 12, 12);
+		System.out.println("¿Hasta qué fecha quieres buscar libros? (Formato: YYYY-MM-DD)");
+		String fecha=sc.nextLine();
+		Date fechaFin = Date.valueOf(fecha);
 		return fechaFin;
 	}
 

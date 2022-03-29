@@ -44,11 +44,13 @@ public class Modificar {
 					l.setPrecio(precio);
 					odb.store(a);
 					odb.commit();
+					Mensajes.precioModicficado(titulo);
 				}
 			}
 		} catch (ODBRuntimeException e) {
 			Mensajes.autorNoEncontrado();
 		}
+		
 
 	}
 }

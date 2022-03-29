@@ -29,6 +29,7 @@ public class Insertar {
 
 	public static void anadirLibroAutor(ODB odb) {
 		Libro libro = PedirDatos.pedirLibro();
+		Mensajes.escogerAutor();
 		String dni = PedirDatos.pedirDni();
 		IQuery query = new CriteriaQuery(Autor.class, Where.equal("dni", dni));
 		Autor autor = null;
@@ -46,9 +47,7 @@ public class Insertar {
 				autor.anadirLibro(libro);
 				odb.store(autor);
 				odb.commit();
-			} else {
-				Mensajes.autorNoEncontrado();
-			}
+			} 
 		} else {
 			Mensajes.libroRepetido();
 		}

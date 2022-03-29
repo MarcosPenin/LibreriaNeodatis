@@ -41,4 +41,24 @@ public class Mensajes {
 		
 	}
 
+	public static void escogerAutor() {
+		System.out.println("¿A qué autor quieres añadirlo?");		
+	}
+
+	public static void precioModicficado(String titulo) {
+		System.out.println("Se ha modificado el precio del libro "+titulo);
+		
+	}
+
+	public static void autorSinLibros() {
+		System.out.println("Ese autor no tiene libros registrados");
+		
+	}
+
+	public static void periodoSinLibros() {
+		System.out.println("Ese autor no tiene libros registrados en ese período");
+		
+		
+	}
+
 }

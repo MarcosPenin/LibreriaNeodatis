@@ -19,15 +19,14 @@ import vista.PedirDatos;
 
 public class Consultar {
 
-	public static void autoresItalianos(ODB odb) {
+	public static void autoresRusos(ODB odb) {
 		IQuery query = new CriteriaQuery(Autor.class, Where.equal("nacionalidad", "Rusia"));
-		Objects italianos = odb.getObjects(query);
-		if (italianos.isEmpty()) {
+		Objects rusos = odb.getObjects(query);
+		if (rusos.isEmpty()) {
 			Mensajes.sinCoincidencias();
 		} else {
-			ConsultasVista.autoresItalianos(italianos);
-			
-		
+			ConsultasVista.autoresRusos(rusos);
+
 		}
 	}
 
@@ -35,6 +34,7 @@ public class Consultar {
 		String dni = PedirDatos.pedirDni();
 		Date fechaInicio = PedirDatos.pedirFechaInicio();
 		Date fechaFin = PedirDatos.pedirFechaFin();
+		boolean flag=false;
 
 		try {
 			IQuery query = new CriteriaQuery(Autor.class, Where.equal("dni", dni));
@@ -42,7 +42,11 @@ public class Consultar {
 			for (Libro l : a.getLibros()) {
 				if (l.getFechaPublicacion().after(fechaInicio) && l.getFechaPublicacion().before(fechaFin)) {
 					ConsultasVista.imprimirLibro(l);
+					flag=true;
 				}
+			}
+			if (!flag) {
+				Mensajes.periodoSinLibros();
 			}
 		} catch (ODBRuntimeException e) {
 			Mensajes.autorNoEncontrado();
@@ -60,7 +64,7 @@ public class Consultar {
 			Mensajes.sinCoincidencias();
 		} else {
 			ConsultasVista.imprimirAutoresMenores60(espanolesMenores60);
-					
+
 		}
 
 	}
@@ -71,8 +75,12 @@ public class Consultar {
 		try {
 			IQuery query = new CriteriaQuery(Autor.class, Where.equal("nombre", nombre));
 			Autor a = (Autor) odb.getObjects(query).getFirst();
-			for (Libro l : a.getLibros()) {
-				ConsultasVista.imprimirLibro(l);
+			if (a.getLibros().isEmpty()) {
+				Mensajes.autorSinLibros();
+			} else {
+				for (Libro l : a.getLibros()) {
+					ConsultasVista.imprimirLibro(l);
+				}
 			}
 		} catch (ODBRuntimeException e) {
 			Mensajes.autorNoEncontrado();
@@ -82,7 +90,7 @@ public class Consultar {
 	public static void libroConAutor(ODB odb) {
 		String titulo = PedirDatos.pedirTitulo();
 		Objects autores = odb.getObjects(Autor.class);
-		
+
 		while (autores.hasNext()) {
 			Autor autor = (Autor) autores.next();
 			for (Libro l : autor.getLibros()) {
@@ -112,4 +120,3 @@ public class Consultar {
 	}
 
 }
-

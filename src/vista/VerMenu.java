@@ -48,7 +48,7 @@ public class VerMenu {
 				Borrar.libro(odb);
 				break;
 			case 6:
-				Consultar.autoresItalianos(odb);
+				Consultar.autoresRusos(odb);
 				break;
 			case 7: 
 				Consultar.librosEntreFechas(odb);
@@ -79,7 +79,7 @@ public class VerMenu {
 		opciones.add("Modificar la direccion de un autor recibiendo su DNI");
 		opciones.add("Modificar el precio de un libro recibiendo su título");
 		opciones.add("Borrado de libros recibiendo su código");
-		opciones.add("Consulta autores italianos");
+		opciones.add("Consulta autores rusos");
 		opciones.add("Consulta libros escritos por un autor entre dos fechas");
 		opciones.add("Consulta autores españoles menores de 60 años");
 		opciones.add("Ver número de autores de una nacionalidad");

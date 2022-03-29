@@ -17,23 +17,22 @@ public class ConsultasVista {
 	}
 
 	public static void imprimirLibro(Libro libro) {
-		System.out.println(libro.toString());
-
+		System.out.println("Libro: " + libro.toString());
 	}
 
 	public static void imprimirAutor(Autor autor) {
-		System.out.println(autor.toString());
+		System.out.println("Autor: " + autor.toString());
 	}
 
 	public static void imprimirNumAutoresNacion(String nacion, int contador) {
 		System.out.println("Hay un total de " + contador + " autores con la nacionalidad " + nacion);
 	}
 
-	public static void autoresItalianos(Objects italianos) {
-		System.out.println("-----LISTA DE AUTORES ITALIANOS---");
+	public static void autoresRusos(Objects rusos) {
+		System.out.println("-----LISTA DE AUTORES RUSOS---");
 		System.out.printf("%-20s %-20s %-20s %n", "NOMBRE", "EDAD", "LIBROS");
-		while (italianos.hasNext()) {
-			Autor autor = (Autor) italianos.next();
+		while (rusos.hasNext()) {
+			Autor autor = (Autor) rusos.next();
 			System.out.printf("%-20s %-20s %-20s %n", autor.getNombre(), autor.getEdad(), autor.getLibros());
 
 		}
